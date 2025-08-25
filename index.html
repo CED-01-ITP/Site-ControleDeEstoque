@@ -2,60 +2,52 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Controle de Estoque</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="site/src/style.css" />
+  <title>Controle de Estoque</title>
 </head>
 <body>
-  <header>
-    <h1>Controle de Estoque</h1>
-    <nav>
-      <label for="metodo">Método de Cálculo:</label>
-      <select id="metodo">
-        <option value="peps">PEPS</option>
-        <option value="ueps">UEPS</option>
-        <option value="media">Custo Médio</option>
-      </select>
-    </nav>
-  </header>
 
-  <main>
-    <section class="entrada">
-      <h2>Entrada de Produtos</h2>
-      <form id="entradaForm">
-        <input type="text" id="produto" placeholder="Nome do Produto" required />
-        <input type="number" id="quantidade" placeholder="Quantidade" required />
-        <input type="number" id="preco" placeholder="Preço Unitário" required />
-        <button type="submit">Adicionar</button>
-      </form>
-    </section>
+  <h1>Controle de Estoque - Métodos PEPS, UEPS e Custo Médio</h1>
 
-    <section class="saida">
-      <h2>Saída de Produtos</h2>
-      <form id="saidaForm">
-        <input type="text" id="produtoSaida" placeholder="Nome do Produto" required />
-        <input type="number" id="quantidadeSaida" placeholder="Quantidade" required />
-        <button type="submit">Remover</button>
-      </form>
-    </section>
+  <form id="formEstoque">
+    <label for="metodo">Método de Custo:</label><br />
+    <select id="metodo" required>
+      <option value="peps">PEPS (FIFO)</option>
+      <option value="ueps">UEPS (LIFO)</option>
+      <option value="medio">Custo Médio</option>
+    </select><br />
 
-    <section class="estoque">
-      <h2>Estoque Atual</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Produto</th>
-            <th>Quantidade</th>
-            <th>Preço Unitário</th>
-          </tr>
-        </thead>
-        <tbody id="tabelaEstoque">
-          <!-- JS vai preencher aqui -->
-        </tbody>
-      </table>
-    </section>
-  </main>
+    <label for="operacao">Operação:</label><br />
+    <select id="operacao" required>
+      <option value="entrada">Entrada</option>
+      <option value="saida">Saída</option>
+    </select><br />
 
+    <label for="preco">Preço Unitário (R$):</label><br />
+    <input type="number" id="preco" min="0" step="0.01" placeholder="Ex: 10.50" /><br />
+
+    <label for="quantidade">Quantidade:</label><br />
+    <input type="number" id="quantidade" min="1" step="1" placeholder="Ex: 5" required /><br />
+
+    <button type="submit">Registrar</button>
+  </form>
+
+  <div class="output" id="resultado"></div>
+
+  <h2>Estoque Atual (Lotes)</h2>
+  <table id="tabelaLotes">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Quantidade</th>
+        <th>Preço Unitário (R$)</th>
+        <th>Valor Total (R$)</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
   <script src="site/src/script.js"></script>
 </body>
 </html>
